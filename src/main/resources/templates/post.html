@@ -9,6 +9,7 @@
 	<!-- TODO - display a single blog post -->
 	<h1 th:text="${post.title}"></h1>
 	<p th:text="${post.body}"></p>
+	<p th:text="${#dates.format(post.created, 'yyyy-MM-dd')}"></p>
 	
 
 </body>
