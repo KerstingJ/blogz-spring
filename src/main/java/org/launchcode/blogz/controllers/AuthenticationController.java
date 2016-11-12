@@ -34,8 +34,8 @@ public class AuthenticationController extends AbstractController {
 
 			User user = new User(username, password);
 			userDao.save(user);
-			
-			return "newpost";	
+			this.setUserInSession(request.getSession(), user);
+			return "redirect:/newpost";	
 		}
 		
 		
