@@ -1,6 +1,8 @@
 package org.launchcode.blogz.models;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +21,14 @@ public class Post extends AbstractEntity {
 	private Date created;
 	private Date modified;
 	
+	public static boolean isValidString(String value) {
+		/*
+		 *  Static method to ensure posts are not made of spaces
+		 */
+		Pattern validString = Pattern.compile("^ *$");
+		Matcher matcher = validString.matcher(value);
+		return matcher.matches();
+	}
 	public Post() {}
 	
 	public Post(String title, String body, User author) {

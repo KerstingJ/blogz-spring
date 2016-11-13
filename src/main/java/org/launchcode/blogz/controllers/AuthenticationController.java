@@ -29,13 +29,15 @@ public class AuthenticationController extends AbstractController {
 		String password = request.getParameter("password");
 		String verify = request.getParameter("verify");
 		System.out.println("Got request headers");
-
+		
+		//look if username is already taken
 		User prev_user = userDao.findByUsername(username);
 		if (prev_user != null) {
 			model.addAttribute("username_error", "Username is already taken");
 			return "signup";
 		}
 		
+		// if everything is valid send 'eem along
 		if (User.isValidUsername(username) && User.isValidPassword(password) && password.equals(verify)) {
 
 			User user = new User(username, password);
@@ -45,6 +47,7 @@ public class AuthenticationController extends AbstractController {
 		}
 		
 		
+		//handle all the errors if didnt pass above
 		if (!User.isValidPassword(password) || password == null) {
 			//if password not valid return error
 			model.addAttribute("password_error", "Password is invalid");
@@ -82,16 +85,19 @@ public class AuthenticationController extends AbstractController {
 		
 		User user = userDao.findByUsername(username);
 		
+		//could we find the username?
 		if (user == null) {
 			model.addAttribute("error", "Username doesnt exist");
 			return "login";
 		}
-
+		
+		//if the password matches send 'eem along the way
 		if (user.isMatchingPassword(password)) {
 			this.setUserInSession(request.getSession(), user);
 			return "redirect:blog/newpost";
 		}
 		
+		//something didn't match up try again
 		model.addAttribute("error", "password is incorrect");
 		return "login";
 		

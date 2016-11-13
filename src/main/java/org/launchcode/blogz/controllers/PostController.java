@@ -35,10 +35,10 @@ public class PostController extends AbstractController {
 		
 		
 		//lets make sure the post has everything we need
-		if (title == null || title.equals("")) {
+		if (title == null || Post.isValidString(title)) {
 			model.addAttribute("error", "please add a title");
 			return "/blog/newpost";
-		} else if (body == null || body.equals("")) {
+		} else if (body == null || Post.isValidString(body)) {
 			model.addAttribute("error", "please add a body to your post");
 			return "/blog/newpost";
 		}
