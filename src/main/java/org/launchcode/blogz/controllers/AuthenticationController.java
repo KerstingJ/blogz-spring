@@ -75,9 +75,10 @@ public class AuthenticationController extends AbstractController {
 		String password = request.getParameter("password");
 		
 		User user = userDao.findByUsername(username);
+		
 		if (user == null) {
 			model.addAttribute("error", "Username doesnt exist");
-			return "/login";
+			return "login";
 		}
 
 		if (user.isMatchingPassword(password)) {
