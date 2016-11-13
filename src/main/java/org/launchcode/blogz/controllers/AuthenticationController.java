@@ -30,6 +30,12 @@ public class AuthenticationController extends AbstractController {
 		String verify = request.getParameter("verify");
 		System.out.println("Got request headers");
 
+		User prev_user = userDao.findByUsername(username);
+		if (prev_user != null) {
+			model.addAttribute("username_error", "Username is already taken");
+			return "signup";
+		}
+		
 		if (User.isValidUsername(username) && User.isValidPassword(password) && password.equals(verify)) {
 
 			User user = new User(username, password);
