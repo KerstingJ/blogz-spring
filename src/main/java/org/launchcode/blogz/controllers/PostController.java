@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class PostController extends AbstractController {
 	
-	@Autowired
-	PostDao postDao;
-	
 	@RequestMapping(value = "/blog/newpost", method = RequestMethod.GET)
 	public String newPostForm() {
 		return "newpost";

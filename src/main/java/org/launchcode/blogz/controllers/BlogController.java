@@ -14,12 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BlogController extends AbstractController {
 	
-	@Autowired
-	UserDao userDao;
-	
-	@Autowired
-	PostDao postDao;
-	
 	@RequestMapping(value = "/")
 	public String index(Model model){
 		
